@@ -1,6 +1,7 @@
 FC/
 data/
 clinical.csv
+gcn/
 
 # Created by https://www.toptal.com/developers/gitignore/api/python,virtualenv,jupyternotebooks,macos
 # Edit at https://www.toptal.com/developers/gitignore?templates=python,virtualenv,jupyternotebooks,macos
