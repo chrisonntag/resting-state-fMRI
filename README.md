@@ -10,6 +10,7 @@ For this repository to run, Python 3.7 is required. I specifically used Python 3
 
 ```
 python -m venv env
+source env/bin/activate
 ```
 
 Install all required libraries with pip via
