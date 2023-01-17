@@ -25,25 +25,34 @@ and clone [GCN](https://github.com/tkipf/gcn) into this repository.
 git clone https://github.com/tkipf/gcn .
 ```
 
-Then install with
+Copy the ```load_data.patch``` and the ```train.patch``` into the cloned repository and apply the changes with 
 
 ```
-cd gcn
+git apply load_data.patch
+git apply train.patch
+```
+
+This modifies the load function in order to work with our data and adds a section to the train script which saves the hidden layer outputs 
+as numpy arrays to files ```in gcn/gcn/embeddings```.
+
+Then install the module with
+
+```
 python setup.py install
 ```
 
 The version number in requirements file of this repo should work with the versions in the gcn implementation. 
-Verify with
+For training with our dataset and parameters for a single patients treatment, use:
 
 ```
-cd gcn
-python train.py
+python train.py --dataset p001_1 --learning_rate 0.01 --epochs 10 --early_stopping 10 --hidden1 10
 ```
 
-which should yield
+
+## Creating the Node embeddings
+Run the ```preprocessing.ipynb``` notebook and follow the commands. You need to execute ```./generate_node_embeddings.sh``` at some point. 
+Make sure that its executable with 
 
 ```
-Optimization Finished!
-Test set results: cost= 1.00715 accuracy= 0.81600 time= 0.00402
+chmod +x generate_node_embeddings.sh
 ```
-

@@ -1,0 +1,36 @@
+diff --git a/gcn/train.py b/gcn/train.py
+index 3c9bb2d..17a5fb5 100644
+--- a/gcn/train.py
++++ b/gcn/train.py
+@@ -1,8 +1,13 @@
+ from __future__ import division
+ from __future__ import print_function
+ 
++import os
++import pickle
++
++## ADDED FOR GENERATING NODE EMBEDDINGS ##
+ import time
+ import tensorflow as tf
++## END ##
+ 
+ from gcn.utils import *
+ from gcn.models import GCN, MLP
+@@ -105,3 +110,17 @@ print("Optimization Finished!")
+ test_cost, test_acc, test_duration = evaluate(features, support, y_test, test_mask, placeholders)
+ print("Test set results:", "cost=", "{:.5f}".format(test_cost),
+       "accuracy=", "{:.5f}".format(test_acc), "time=", "{:.5f}".format(test_duration))
++
++
++## ADDED FOR GENERATING NODE EMBEDDINGS ##
++feed_dict = construct_feed_dict(features, support, y_train, train_mask, placeholders)
++feed_dict.update({placeholders['dropout']: FLAGS.dropout})
++
++hidden_layer = sess.run(model.activations[-2], feed_dict=feed_dict)
++
++if not os.path.exists('embeddings'):
++    os.makedirs('embeddings')
++
++with open(f'embeddings/{FLAGS.dataset}.np', 'wb') as f:
++    pickle.dump(hidden_layer, f) 
++## END ##
