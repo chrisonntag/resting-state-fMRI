@@ -3,6 +3,7 @@ data/
 AAL_timeseries
 clinical.csv
 gcn/
+ignn/
 
 # Created by https://www.toptal.com/developers/gitignore/api/python,virtualenv,jupyternotebooks,macos
 # Edit at https://www.toptal.com/developers/gitignore?templates=python,virtualenv,jupyternotebooks,macos
